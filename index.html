@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>ЦКС клан | Клан в CS2</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #0f172a;
+            color: white;
+        }
+
+        header {
+            background: #020617;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            color: #22c55e;
+        }
+
+        nav {
+            margin-top: 10px;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        section {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 400px;
+            border-radius: 10px;
+        }
+
+        input, textarea {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            background: #22c55e;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        footer {
+            background: #020617;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Центральное Киберспортивное Сообщество</h1>
+    <nav>
+        <a href="#about">О клане</a>
+        <a href="#join">Вступить</a>
+        <a href="#contacts">Контакты</a>
+    </nav>
+</header>
+
+<section id="about">
+    <h2>О клане</h2>
+    <p>ЦКС (Центральное Киберспортивное сообщество) - самый крутой и большой клан на yooma.su!🔥</p>
+</section>
+
+<section id="join">
+    <h2>Подать заявку</h2>
+
+    <div class="card">
+        <form onsubmit="sendForm(event)">
+            <input type="text" placeholder="Ссылка на Steam-профиль" required><br>
+            <input type="text" placeholder="Discord" required><br>
+            <input type="number" placeholder="Возраст" required><br>
+            <input type="text" placeholder="LVL Faceit, если ли Prime-статус" required><br>
+            <textarea placeholder="Почему хочешь вступить?" required></textarea><br>
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+</section>
+
+<section id="contacts">
+<p id="result"></p>
+    <h2>Контакты</h2>
+    <p>Discord: скоро будет</p>
+    <p>Steam: скоро будет</p>
+    <p>VK: скоро будет</p>
+</section>
+
+<footer>
+    <p>© 2026 ЦКС</p>
+</footer>
+
+<script>
+function sendForm(event) {
+    event.preventDefault();
+
+    let inputs = document.querySelectorAll("input");
+    let nickname = inputs[0].value;
+    let age = inputs[1].value;
+    let rank = inputs[2].value;
+    let discord_contact = inputs[3].value;
+    let reason = document.querySelector("textarea").value;
+
+    fetch("https://discord.com/api/webhooks/1492951478346715327/X-9UMzkdfaRaHy6TH-evHBm_ZHiM5x3CS7998HmwmNYZF6SD82OoBtCNMXDCer2s_OQk", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            embeds: [{
+                title: "📥 Новая заявка в клан ЦКС",
+                color: 5763719,
+                fields: [
+                    { name: "🎮 Steam", value: nickname },
+                    { name: "📞 discord", value: discord_contact },
+                    { name: "🎂 Возраст", value: age },
+                    { name: "🏆 Ранг", value: rank },
+                    { name: "💬 Причина", value: reason }
+                ],
+                footer: {
+                    text: "Админы, пора работать!"
+                }
+            }]
+        })
+    });
+
+    alert("Заявка отправлена!✔️");
+}
+</script>
+</body>
+</html>
